@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet"> 
-  <link rel="stylesheet" type="text/css" href="index.css?v=8">
+  <link rel="stylesheet" type="text/css" href="index.css">
   <script src="vue.min.js"></script>
   <script src="axios.min.js"></script>
   <script src="lodash.min.js"></script>
@@ -33,14 +33,14 @@
       <div v-for="deck in deckList" @click="loadLocalDeck(deck.file)" class="list-item">
         <h3>{{deck.name}}</h3>
         <p>
-          <img :src="flagUrl(deck.front)" :alt="deck.front" class="flag">
+          <img :src="flagUrl(deck.front)" :alt="deck.front.toUpperCase()" :title="deck.front.toUpperCase()" class="flag">
           <span><strong>→</strong></span>
-          <img :src="flagUrl(deck.back)" :alt="deck.back" class="flag">
+          <img :src="flagUrl(deck.back)" :alt="deck.back.toUpperCase()" :title="deck.back.toUpperCase()" class="flag">
         </p>
         <p>
-          <span class="total"><strong>Σ</strong> {{deck.total}}</span>&nbsp;
-          <span class="unknown">✘ {{deck.unknown}}</span>&nbsp;
-          <span class="known">✔ {{deck.known}}</span>
+          <span class="total" title="Total number of cards"><strong>Σ</strong> {{deck.total}}</span>&nbsp;
+          <span class="unknown" title="Number of unknown cards">✘ {{deck.unknown}}</span>&nbsp;
+          <span class="known" title="Number of well-known cards">✔ {{deck.known}}</span>
           <button @click.stop="deleteLocalDeck(deck.file)" title="Delete">&#x1f5d1;</button>
         </p>
         <hr>
@@ -50,27 +50,27 @@
     <!-- Review -->
     <div id="review" v-if="page === 'review'" v-cloak>
       <div class="menu-bar">
-        <button @click="goToLocalDecks" class="left">&lt;&lt;</button>
-        <button @click="goToDeckBrowser" class="right">Inspect</button>
-        <button @click="shuffleCurrentDeck" class="right">Shuffle</button>
+        <button @click="goToLocalDecks" class="left" title="Back to deck list">&lt;&lt;</button>
+        <button @click="goToDeckBrowser" class="right" title="Inspect">Inspect</button>
+        <button @click="shuffleCurrentDeck" class="right" title="Shuffle deck">Shuffle</button>
       </div>
       <div class="front"><span>{{front}}</span></div>
       <hr>
       <div class="back"><span v-show="isShowingAnswer">{{back}}</span></div>
       <div class="review-buttons">
-        <button @click="wrong" v-show="isShowingAnswer" class="wrong">WRONG</button>
-        <button @click="showAnswer" v-show="!isShowingAnswer" class="show-answer">SHOW ANSWER</button>
-        <button @click="correct" v-show="isShowingAnswer" class="correct">CORRECT</button>
+        <button @click="wrong" v-show="isShowingAnswer" class="wrong" title="Wrong">WRONG</button>
+        <button @click="showAnswer" v-show="!isShowingAnswer" class="show-answer" title="Show answer">SHOW ANSWER</button>
+        <button @click="correct" v-show="isShowingAnswer" class="correct" title="Correct">CORRECT</button>
       </div>
     </div>
 
     <!-- Deck Browser -->
     <div id="deck-browser" v-if="page === 'browser'" v-cloak>
       <div class="menu-bar">
-        <button @click="goToReview" class="left">&lt;&lt;</button>
-        <button @click="resetStrengthOfCurrentDeck(2)" class="right">Reset (2)</button>
-        <button @click="resetStrengthOfCurrentDeck(0)" class="right">Reset (0)</button>
-        <button @click="shuffleCurrentDeck" class="right">Shuffle</button>
+        <button @click="goToReview" class="left" title="Back">&lt;&lt;</button>
+        <button @click="resetStrengthOfCurrentDeck(2)" class="right" title="Reset all cards to level 2">Reset (2)</button>
+        <button @click="resetStrengthOfCurrentDeck(0)" class="right" title="Reset all cards to level 0">Reset (0)</button>
+        <button @click="shuffleCurrentDeck" class="right" title="Shuffle deck">Shuffle</button>
       </div>
       <div>
         <input type="text" v-model="filter" placeholder="Search">
@@ -86,15 +86,15 @@
     <!-- Deck Download -->
     <div id="deck-download" v-if="page === 'online'" v-cloak>
       <div class="menu-bar">
-        <button v-if="deckList.length" @click="goToLocalDecks" class="left">&lt;&lt;</button>
-        <button @click="goToAboutPage" class="right">About</button>
+        <button v-if="deckList.length" @click="goToLocalDecks" class="left" title="Back to deck list">&lt;&lt;</button>
+        <button @click="goToAboutPage" class="right" title="About">About</button>
       </div>
       <div v-for="deck in onlineDeckList" @click="importServerDeck(deck.file)" class="list-item">
         <h3>{{deck.name}}</h3>
         <p>
-          <img :src="flagUrl(deck.front)" :alt="deck.front" class="flag">
+          <img :src="flagUrl(deck.front)" :alt="deck.front.toUpperCase()" :title="deck.front.toUpperCase()" class="flag">
           <span><strong>→</strong></span>
-          <img :src="flagUrl(deck.back)" :alt="deck.back" class="flag">
+          <img :src="flagUrl(deck.back)" :alt="deck.back.toUpperCase()" :title="deck.back.toUpperCase()" class="flag">
         </p>
         <p>{{deck.description}}</p>
         <hr>
@@ -104,20 +104,20 @@
     <!-- About Page -->
     <div id="about-page" v-if="page === 'about'" v-cloak>
       <div class="menu-bar">
-        <button @click="goToServerDecks" class="left">&lt;&lt;</button>
+        <button @click="goToServerDecks" class="left" title="Back">&lt;&lt;</button>
       </div>
       <h2>Word lists</h2>
       <table>
         <tr v-for="deck in onlineDeckList">
-          <td>{{deck.name}}</td>
+          <td><strong>{{deck.name}}</strong></td>
           <td>
-            <img :src="flagUrl(deck.front)" class="flag-small">
+            <img :src="flagUrl(deck.front)" :title="deck.front.toUpperCase()" class="flag-small">
             <strong> → </strong>
-            <img :src="flagUrl(deck.back)" class="flag-small">
+            <img :src="flagUrl(deck.back)" :title="deck.back.toUpperCase()" class="flag-small">
           </td>
-          <td><a :href="deck.file + '.csv'" target="_blank">CSV</a></td>
-          <td><a :href="deck.file + '.xlsx'" target="_blank">Excel</a></td>
-          <td><a :href="deck.file + '.txt'" target="_blank">JSON</a></td>
+          <td><a :href="deck.file + '.csv'" target="_blank" title="CSV">CSV</a></td>
+          <td><a :href="deck.file + '.xlsx'" target="_blank" title="Excel">Excel</a></td>
+          <td><a :href="deck.file + '.txt'" target="_blank" title="JSON">JSON</a></td>
         </tr>
       </table>
       <h2>Links</h2>
@@ -130,7 +130,7 @@
     
   </div>
 
-  <script src="index.js?v=3"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>
