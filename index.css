@@ -1,0 +1,188 @@
+[v-cloak] {
+  display: none;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: deepskyblue;
+  text-align: center;
+  margin: 0;
+  height: 100%;
+}
+
+#app {
+  position: relative;
+  background-color: white;
+  max-width: 768px;
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0 17px;
+}
+
+.total {
+  color: midnightblue;
+}
+
+.unknown {
+  color: red;
+}
+
+.known {
+  color: green;
+}
+
+.front {
+  height: 30vh;
+  padding: 20px 10px 10px 10px;
+  font-size: 2em;
+}
+
+.back {
+  padding: 10px;
+  height: 30vh;
+  font-size: 2em;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.menu-bar {
+  height: 60px;
+  margin: 0 -17px;
+  background-color: black;
+  color: white;
+}
+
+.menu-bar button {
+  height: 50px;
+  margin: 5px;
+  padding: 0 15px;
+  background-color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.2em;
+  border-radius: 10px;
+}
+
+button.left {
+  float: left;
+  margin-right: 0;
+}
+
+button.right {
+  float: right;
+  margin-left: 0;
+}
+
+.list-item {
+  cursor: pointer;
+  margin-left: -17px;
+  margin-right: -17px;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+.list-item:hover {
+  background-color: lightblue;
+}
+
+.list-item button {
+  background-color: transparent;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.2em;
+}
+
+.review-buttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 15vh;
+  vertical-align: middle;
+}
+
+.review-buttons button {
+  font-size: 1.5em;
+  padding: 20px;
+}
+
+.correct {
+  background-color: green;
+  margin-left: 1.25%;
+  width: 45%;
+}
+
+.wrong {
+  background-color: red;
+  margin-right: 1.25%;
+  width: 45%;
+}
+
+.show-answer {
+  background-color: deepskyblue;
+  width: 92.5%;
+}
+
+input[type='text'] {
+  width: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 2em;
+  border: none;
+  outline: none;
+  background-color: deepskyblue;
+  margin: 10px -10px;
+  padding: 10px;
+}
+
+hr {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+  padding-top: 10px;
+}
+
+p {
+  margin: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.flag {
+  height: 20px;
+  vertical-align: middle;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.well-known {
+  background-color: lightgreen;
+}
+
+.learning {
+  background-color: white;
+}
+
+.new {
+  background-color: lightcoral;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+a {
+  color: red;
+  text-decoration: none;
+}
+  
+  

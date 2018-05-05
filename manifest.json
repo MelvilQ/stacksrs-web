@@ -1,0 +1,31 @@
+{
+    "name": "StackSRS",
+    "short_name": "StackSRS",
+    "start_url": "/",
+    "icons": [
+		{
+            "src": "logo-96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+		{
+            "src": "logo-144.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "logo-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+		},
+		{
+            "src": "logo-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "background_color": "#FFFFFF",
+    "theme_color": "#1969BF",
+	"display": "standalone",
+	"orientation": "portrait"
+}

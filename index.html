@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>StackSRS - Learn Vocabulary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1969BF">
+  <meta charset="utf-8">
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="index.css?v=8">
+  <script src="vue.min.js"></script>
+  <script src="axios.min.js"></script>
+  <script src="lodash.min.js"></script>
+  <script src="mousetrap.min.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <!-- Splash Screen -->
+    <div id="splash-screen" v-if="page === 'logo'">
+      <h1>StackSRS</h1>
+      <img src="logo-192.png" alt="Logo" title="StackSRS">
+    </div>
+
+    <!-- Deck List -->
+    <div id="deck-list" v-if="page === 'local'" v-cloak>
+      <div class="menu-bar">
+        <button @click="goToServerDecks" class="right" title="Online Decks">Online Decks &#x1f30e;</button>
+      </div>
+      <div v-for="deck in deckList" @click="loadLocalDeck(deck.file)" class="list-item">
+        <h3>{{deck.name}}</h3>
+        <p>
+          <img :src="flagUrl(deck.front)" :alt="deck.front" class="flag">
+          <span><strong>→</strong></span>
+          <img :src="flagUrl(deck.back)" :alt="deck.back" class="flag">
+        </p>
+        <p>
+          <span class="total"><strong>Σ</strong> {{deck.total}}</span>&nbsp;
+          <span class="unknown">✘ {{deck.unknown}}</span>&nbsp;
+          <span class="known">✔ {{deck.known}}</span>
+          <button @click.stop="deleteLocalDeck(deck.file)" title="Delete">&#x1f5d1;</button>
+        </p>
+        <hr>
+      </div>
+    </div>
+
+    <!-- Review -->
+    <div id="review" v-if="page === 'review'" v-cloak>
+      <div class="menu-bar">
+        <button @click="goToLocalDecks" class="left">&lt;&lt;</button>
+        <button @click="goToDeckBrowser" class="right">Inspect</button>
+        <button @click="shuffleCurrentDeck" class="right">Shuffle</button>
+      </div>
+      <div class="front"><span>{{front}}</span></div>
+      <hr>
+      <div class="back"><span v-show="isShowingAnswer">{{back}}</span></div>
+      <div class="review-buttons">
+        <button @click="wrong" v-show="isShowingAnswer" class="wrong">WRONG</button>
+        <button @click="showAnswer" v-show="!isShowingAnswer" class="show-answer">SHOW ANSWER</button>
+        <button @click="correct" v-show="isShowingAnswer" class="correct">CORRECT</button>
+      </div>
+    </div>
+
+    <!-- Deck Browser -->
+    <div id="deck-browser" v-if="page === 'browser'" v-cloak>
+      <div class="menu-bar">
+        <button @click="goToReview" class="left">&lt;&lt;</button>
+        <button @click="resetStrengthOfCurrentDeck(2)" class="right">Reset (2)</button>
+        <button @click="resetStrengthOfCurrentDeck(0)" class="right">Reset (0)</button>
+        <button @click="shuffleCurrentDeck" class="right">Shuffle</button>
+      </div>
+      <div>
+        <input type="text" v-model="filter" placeholder="Search">
+      </div>
+      <div v-for="card in filteredCards" :class="highlightColor(card)" class="list-item">
+        <p>{{card.front}}</p>
+        <p><strong>{{card.back}}</strong></p>
+        <p>Level: {{card.level}}</p>
+        <hr>
+      </div>
+    </div>
+
+    <!-- Deck Download -->
+    <div id="deck-download" v-if="page === 'online'" v-cloak>
+      <div class="menu-bar">
+        <button v-if="deckList.length" @click="goToLocalDecks" class="left">&lt;&lt;</button>
+        <button @click="goToAboutPage" class="right">About</button>
+      </div>
+      <div v-for="deck in onlineDeckList" @click="importServerDeck(deck.file)" class="list-item">
+        <h3>{{deck.name}}</h3>
+        <p>
+          <img :src="flagUrl(deck.front)" :alt="deck.front" class="flag">
+          <span><strong>→</strong></span>
+          <img :src="flagUrl(deck.back)" :alt="deck.back" class="flag">
+        </p>
+        <p>{{deck.description}}</p>
+        <hr>
+      </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about-page" v-if="page === 'about'" v-cloak>
+      <div class="menu-bar">
+        <button @click="goToServerDecks" class="left">&lt;&lt;</button>
+      </div>
+      <h2>Links</h2>
+      <p><a href="https://github.com/MelvilQ/stacksrs-web" target="_blank">GitHub repository of this website</a></p>
+      <p><a href="https://github.com/MelvilQ/stacksrs" target="_blank">GitHub repository of the StackSRS Android app</a></p>
+    </div>
+    
+  </div>
+
+  <script src="index.js?v=3"></script>
+</body>
+
+</html>
