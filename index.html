@@ -106,9 +106,24 @@
       <div class="menu-bar">
         <button @click="goToServerDecks" class="left">&lt;&lt;</button>
       </div>
+      <h2>Word lists</h2>
+      <table>
+        <tr v-for="deck in onlineDeckList">
+          <td>{{deck.name}}</td>
+          <td>
+            <img :src="flagUrl(deck.front)" class="flag-small">
+            <strong> → </strong>
+            <img :src="flagUrl(deck.back)" class="flag-small">
+          </td>
+          <td><a :href="deck.file + '.csv'" target="_blank">CSV</a></td>
+          <td><a :href="deck.file + '.xlsx'" target="_blank">Excel</a></td>
+          <td><a :href="deck.file + '.txt'" target="_blank">JSON</a></td>
+        </tr>
+      </table>
       <h2>Links</h2>
       <p><a href="https://github.com/MelvilQ/stacksrs-web" target="_blank">GitHub repository of this website</a></p>
       <p><a href="https://github.com/MelvilQ/stacksrs" target="_blank">GitHub repository of the StackSRS Android app</a></p>
+      <p><a href="https://play.google.com/store/apps/details?id=de.melvil.stacksrs" target="_blank">StackSRS Android app on Google Play</a></p>
     </div>
     
   </div>

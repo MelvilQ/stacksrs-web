@@ -164,6 +164,11 @@ p {
   margin-right: 8px;
 }
 
+.flag-small {
+  height: 15px;
+  vertical-align: middle;
+}
+
 .well-known {
   background-color: lightgreen;
 }
@@ -183,6 +188,10 @@ button::-moz-focus-inner {
 a {
   color: red;
   text-decoration: none;
+}
+
+table {
+  width: 100%;
 }
   
   
