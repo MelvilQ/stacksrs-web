@@ -106,6 +106,7 @@
       <div class="menu-bar">
         <button @click="goToServerDecks" class="left" title="Back">&lt;&lt;</button>
       </div>
+
       <h2>Word lists</h2>
       <table>
         <tr v-for="deck in onlineDeckList">
@@ -120,10 +121,16 @@
           <td><a :href="deck.file + '.txt'" target="_blank" title="JSON">JSON</a></td>
         </tr>
       </table>
+
       <h2>Links</h2>
       <p><a href="https://github.com/MelvilQ/stacksrs-web" target="_blank">GitHub repository of this website</a></p>
       <p><a href="https://github.com/MelvilQ/stacksrs" target="_blank">GitHub repository of the StackSRS Android app</a></p>
       <p><a href="https://play.google.com/store/apps/details?id=de.melvil.stacksrs" target="_blank">StackSRS Android app on Google Play</a></p>
+      
+      <h2>Contact</h2>
+      <p>If you want to tell me about an error that you found, or if you have created word lists that you would like to see in the
+      StackSRS deck collection, please get in touch with me via <a href="mailto:patpp17@web.de">email</a>.</p>
+
       <br><hr>
       <p>(c) 2018 MelvilQ</p>
     </div>
