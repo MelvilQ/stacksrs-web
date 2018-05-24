@@ -219,8 +219,8 @@ var app = new Vue({
         position = 1 << (card.level * 2 + 2);
         // adding some randomness so that it doesn't get too predictable
         position = Math.floor(position + (2 * Math.random() * (position / 3)) - (position / 3));
-        position = Math.min(position, this.currentDeck.cards.length);
       }
+      position = Math.min(position, this.currentDeck.cards.length);
       this.currentDeck.cards.splice(position, 0, card);
       this.saveCurrentDeck();
       this.showNextCard();
