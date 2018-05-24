@@ -279,3 +279,4 @@ Mousetrap.bind('r', app.correct);
 Mousetrap.bind('c', app.correct);
 Mousetrap.bind('s', app.showAnswer);
 Mousetrap.bind('space', app.continue);
+Mousetrap.bind('enter', app.continue);
