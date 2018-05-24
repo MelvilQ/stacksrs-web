@@ -110,7 +110,7 @@
       <h2>Word lists</h2>
       <table>
         <tr v-for="deck in onlineDeckList">
-          <td><strong>{{deck.name}}</strong></td>
+          <td><strong :title="deck.description">{{deck.name}}</strong></td>
           <td>
             <img :src="flagUrl(deck.front)" :title="deck.front.toUpperCase()" class="flag-small">
             <strong> → </strong>
