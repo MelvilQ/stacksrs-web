@@ -28,6 +28,7 @@
     <!-- Deck List -->
     <div id="deck-list" v-if="page === 'local'" v-cloak>
       <div class="menu-bar">
+        <button @click="goToAboutPage" class="right" title="About">About</button>
         <button @click="goToServerDecks" class="right" title="Online Decks">Online Decks &#x1f30e;</button>
       </div>
       <div v-for="deck in deckList" @click="loadLocalDeck(deck.file)" class="list-item">
@@ -128,6 +129,7 @@
       <p><a href="https://play.google.com/store/apps/details?id=de.melvil.stacksrs" target="_blank">StackSRS Android app on Google Play</a></p>
       
       <h2>Contact</h2>
+      Patrick Pauli<br>Parkstr. 61A<br>D-65191 Wiesbaden<br>☎ 0611 88004997<br>✉ <a href="mailto:patpp17@web.de">patpp17@web.de</a>
       <p>If you want to tell me about an error that you found, or if you have created word lists that you would like to see in the
       StackSRS deck collection, please get in touch with me via <a href="mailto:patpp17@web.de">email</a>.</p>
 
