@@ -157,6 +157,10 @@ p {
   padding-bottom: 8px;
 }
 
+p.solution {
+  padding: 0;
+}
+
 .flag {
   height: 20px;
   vertical-align: middle;
