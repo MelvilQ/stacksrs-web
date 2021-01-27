@@ -82,6 +82,11 @@ button.right {
   margin-left: 0;
 }
 
+#file-picker {
+  position: fixed; 
+  top: -1000px;
+}
+
 .list-item {
   cursor: pointer;
   margin-left: -17px;

@@ -33,7 +33,7 @@
       </div>
       <div v-for="deck in deckList" @click="loadLocalDeck(deck.file)" class="list-item">
         <h3>{{deck.name}}</h3>
-        <p>
+        <p v-if="deck.front && deck.back">
           <img :src="flagUrl(deck.front)" :alt="deck.front.toUpperCase()" :title="deck.front.toUpperCase()" class="flag">
           <span><strong>→</strong></span>
           <img :src="flagUrl(deck.back)" :alt="deck.back.toUpperCase()" :title="deck.back.toUpperCase()" class="flag">
@@ -90,6 +90,7 @@
       <div class="menu-bar">
         <button v-if="deckList.length" @click="goToLocalDecks" class="left" title="Back to deck list">&lt;&lt;</button>
         <button @click="goToAboutPage" class="right" title="About">About</button>
+        <button @click="openFilePicker" class="right" title="Open CSV File">Open CSV</button><input type="file" id="file-picker" accept=".csv" @change="openCsvFile($event.target.files[0])">
       </div>
       <div v-for="deck in onlineDeckList" @click="importServerDeck(deck.file)" class="list-item">
         <h3>{{deck.name}}</h3>

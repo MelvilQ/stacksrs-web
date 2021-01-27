@@ -4,8 +4,7 @@
   "description": "Spaced-repetition vocabulary app for the web",
   "main": "index.js",
   "scripts": {
-	"start": "http-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+	  "start": "http-server"
   },
   "repository": {
     "type": "git",

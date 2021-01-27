@@ -113,9 +113,7 @@ var app = new Vue({
       }
       axios.get(file + '.txt').then(response => {
         let downloadedDeck = response.data;
-        downloadedDeck.cards.forEach(card => {
-          card.level = 2;
-        });
+        downloadedDeck.cards.forEach(card => card.level = 2);
         this.currentDeck = Object.assign({}, downloadedDeck);
         downloadedDeck.cards = undefined;
         this.deckList.push(downloadedDeck);
@@ -127,11 +125,29 @@ var app = new Vue({
         this.showError('Could not import deck. Please try it again later.');
       });
     },
-    importFromFile(file) {
-      // TODO
+    openFilePicker() {
+      document.getElementById('file-picker').click();
     },
-    createNewDeck() {
-      // TODO
+    resetFilePicker() {
+      document.getElementById('file-picker').type = 'text';
+      document.getElementById('file-picker').type = 'file';
+    },
+    openCsvFile(file) {
+      let fileReader = new FileReader();
+      console.log(file);
+      fileReader.onload = () => this.parseCsvFile(fileReader.result, file.name.replace('.csv', ''));
+      fileReader.readAsText(file);
+      this.resetFilePicker();
+    },
+    parseCsvFile(csv, filename) {
+      let cards = csv.split('\n').map(line => line.trim()).filter(line => !!line)
+        .map(line => line.split('\t')).map(([front, back]) => ({front, back, level: 2}));
+      let deck = {file: filename, name: filename, front: '', back: '', cards};
+      this.currentDeck = Object.assign({}, deck);
+      deck.cards = undefined;
+      this.deckList.push(deck);
+      this.saveCurrentDeck();
+      this.loadLocalDeck(filename);
     },
     saveCurrentDeckToFile() {
       download(this.currentDeck.file + '.txt', JSON.stringify(this.currentDeck));
