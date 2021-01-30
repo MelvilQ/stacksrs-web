@@ -140,14 +140,23 @@ var app = new Vue({
       this.resetFilePicker();
     },
     parseCsvFile(csv, filename) {
-      let cards = csv.split('\n').map(line => line.trim()).filter(line => !!line)
-        .map(line => line.split('\t')).map(([front, back]) => ({front, back, level: 2}));
-      let deck = {file: filename, name: filename, front: '', back: '', cards};
-      this.currentDeck = Object.assign({}, deck);
-      deck.cards = undefined;
-      this.deckList.push(deck);
-      this.saveCurrentDeck();
-      this.loadLocalDeck(filename);
+      try { 
+        let cards = csv.split('\n').map(line => line.trim()).filter(line => !!line)
+          .map(line => line.split('\t')).map(([front, back]) => ({front, back, level: 2}));
+        const doubleSided = confirm('Create a card for both directions?');
+        if (doubleSided) {
+          cards = cards.concat(cards.map(card => ({...card, front: card.back, back: card.front})));
+        }
+        let deck = {file: filename, name: filename, front: '', back: '', cards};
+        this.currentDeck = Object.assign({}, deck);
+        deck.cards = undefined;
+        this.deckList.push(deck);
+        this.saveCurrentDeck();
+        this.loadLocalDeck(filename);
+      } catch(e) {
+        console.log(e);
+        this.showError('Could not import CSV file. It has probably the wrong format.');
+      }
     },
     saveCurrentDeckToFile() {
       download(this.currentDeck.file + '.txt', JSON.stringify(this.currentDeck));
