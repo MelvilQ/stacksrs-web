@@ -11,6 +11,18 @@ Web version of [StackSRS](https://github.com/MelvilQ/stacksrs), an app to learn 
 
 These scripts can be run using Python 3 only.
 
+### mergeXlsxToCsv.py
+
+Generates a CSV file from an Excel (*.xlsx) document, merging all sheets to one list.
+
+Arguments:
+
+* Filename of the Excel file
+
+Remarks:
+
+* This script expects `pandas` and `xlrd` to be pip-installed
+
 ### importMemriseCourse.py
 
 Generates a CSV file from a Memrise course.
